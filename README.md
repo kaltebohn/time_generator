@@ -1,6 +1,6 @@
-#### 時間割作成プログラム
+## 時間割作成プログラム
 
-##### どのようなプログラム？
+#### どのようなプログラム？
 大学の時間割として、
 - 科目名
 - シラバスURL
@@ -11,7 +11,16 @@
 
 htmlをスマホ、PCなどに入れ、通常の時間割のように手軽にみられることを目的としています．
 
-#### 開発環境
+#### 実行方法
+###### 時間割の作成
+- `bundle exec ruby generator.rb`を実行
+- 表示されるガイドに従い入力
+
+###### 時間割の修正
+- `bundle exec ruby generator.rb`を実行
+- 表示されるガイドに従い入力
+
+## 開発環境
 ```
 $cat /etc/os-release
 NAME="Ubuntu"
@@ -31,7 +40,3 @@ UBUNTU_CODENAME=bionic
 $ruby --version
 ruby 2.6.5p114 (2019-10-01 revision 67812) [x86_64-linux]
 ```
-
-#### 実行方法
-- `bundle exec ruby generator.rb`を実行
-- 表示されるガイドに従い入力
