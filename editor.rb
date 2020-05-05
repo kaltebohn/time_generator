@@ -1,32 +1,62 @@
-require 'nokogiri'
-require 'pry'
+require './common'
 
 def edit_table(html)
   doc = Nokogiri::HTML.parse(html)
-
-  row_index, column_index = accept_field_designation
+  column_index, row_index = accept_field_designation
   unless row_index && column_index
-    print '時間割の指定に誤りがあります．'
+    puts '時間割の指定に誤りがあります．もう一度入力してください．'
     return nil
   end
 
-  target_node = doc.css('tr')[row_index + 1].css('td')[column_index + 1]
-  print target_node
+  child = Nokogiri::HTML::DocumentFragment.parse('')
+  Nokogiri::HTML::Builder.with(child) do |td_node|
+    td_node << "<td>#{create_class_field(accept_classdata)}</td>"
+  end
+  binding.pry
+  doc.css('tr')[row_index].css('td')[column_index].replace(child)
+  doc.to_html
 end
 
 def accept_field_designation
-  print '何曜日？(月 火 水 木 金) >>'
+  print "何曜日？(#{col_headers[1..-1]}) >>"
   column = gets.strip
-  column_index = %w[月 火 水 木 金].index(column)
+  column_index = col_headers.index(column)
   return nil unless column_index
 
-  print '何時限目？(1 2 3 4 5) >>'
+  row_headers_shorten = row_headers.map { |r| r[0] }
+  print "何時限目？(#{row_headers_shorten}) >>"
   row = gets.strip
-  row_index = %w[1 2 3 4 5].index(row)
+  row_index = row_headers_shorten.index(row)
   return nil unless row_index
 
+  row_index += 1 # 列ヘッダの分 +1 する．
   [column_index, row_index]
 end
 
-html = open('time_table.html').read
-p edit_table(html)
+def quit_confirmation
+  loop do
+    print '編集を終えますか？(y / n) >>'
+    return true if gets.strip == 'y'
+    return false if gets.strip == 'n'
+  end
+end
+
+def main(filename)
+  html = File.open(filename).read
+  if html.empty?
+    puts '空のファイルです．'
+    return nil
+  end
+
+  loop do
+    table = edit_table(html)
+    return table if quit_confirmation
+  end
+end
+
+edited_table = main('test.html')
+if edited_table
+  File.open('test.html', 'w') do |f|
+    f.puts edited_table if edited_table
+  end
+end
