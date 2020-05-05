@@ -1,0 +1,71 @@
+# 日本語でのコメントを許可
+AsciiComments:
+  Enabled: false
+
+# 行が長すぎる無視
+LineLength:
+  Enabled: false
+
+# メソッドの行数が多すぎる無視
+MethodLength:
+  Enabled: false
+
+# 引数の数が多すぎる無視
+ParameterLists:
+  Max: 12
+
+# ネストが深すぎる許可
+BlockNesting:
+  Max: 7
+
+# クラスの行数が多すぎる無視
+ClassLength:
+  Enabled: false
+
+# 1_000_000 と区切り文字が 2 個以上必要になる場合のみ _ 区切りを必須にする
+Style/NumericLiterals:
+  MinDigits: 7
+
+# コードと同じ行にコメント注意を無視
+Style/CommentedKeyword:
+  Description: 'Do not place comments on the same line as certain keywords.'
+  Enabled: false
+
+# rubyのバージョン指定
+AllCops:
+  TargetRubyVersion: 2.4
+
+# rails
+Rails:
+  Enabled: true
+
+# string凍結注意の無視
+Style/FrozenStringLiteralComment:
+    Enabled: false
+
+# 後置ifのおすすめ無効
+IfUnlessModifier:
+    Enabled: true
+
+# 文字列”も'もOK
+# Style/StringLiterals:
+#  Enabled: true
+
+# ApplicationRecord使ってね、を無視
+AllCops:
+    TargetRailsVersion: 4.0
+
+# "Missing top-level class documentation comment."を無効
+Style/Documentation:
+  Enabled: false
+
+# ハッシュをテーブル風に書く
+AlignHash:
+  EnforcedColonStyle: table
+
+# 改行文字はlinux仕様
+Layout/EndOfLine:
+  EnforcedStyle: lf
+
+Metrics/AbcSize:
+  Max: 20
