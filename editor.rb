@@ -12,7 +12,6 @@ def edit_field(html)
   Nokogiri::HTML::Builder.with(child) do |td_node|
     td_node << "<td>#{create_class_field(accept_classdata)}</td>"
   end
-  binding.pry
   doc.css('tr')[row_index].css('td')[column_index].replace(child)
   doc.to_html
 end
