@@ -12,7 +12,7 @@ end
 
 def fetch_table_type
   json = open('conf.json').read
-  type = JSON.parse(json)['type']
+  type = JSON.parse(json, symbolize_names: true)[:type]
 
   if type == 'zoom'
     {
@@ -20,6 +20,15 @@ def fetch_table_type
       id:   { name: 'ZoomID', link: false },
       pass: { name: 'ZoomPass', link: false }
     }
+  elsif type == 'four_links'
+    {
+      sylb: { name: 'シラバス', link: true },
+      wbcl: { name: 'WebClass', link: true },
+      glcl: { name: 'Googleクラス', link: true },
+      othe: { name: '授業関連ページ', link: true }
+    }
+  elsif type == 'custom'
+    json[:customed_field]
   else
     {
       sylb: { name: 'シラバス', link: true },
@@ -61,4 +70,13 @@ def accept_classdata
     classdata.merge!(key => gets.strip)
   end
   classdata
+end
+
+def quit_confirmation
+  loop do
+    print '操作を終えますか？(y / n) >>'
+    command = gets.strip
+    return true if command == 'y'
+    return false if command == 'n'
+  end
 end

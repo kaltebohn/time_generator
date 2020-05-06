@@ -33,14 +33,6 @@ def accept_field_designation
   [column_index, row_index]
 end
 
-def quit_confirmation
-  loop do
-    print '編集を終えますか？(y / n) >>'
-    return true if gets.strip == 'y'
-    return false if gets.strip == 'n'
-  end
-end
-
 def main(filename)
   html = File.open(filename).read
   if html.empty?
