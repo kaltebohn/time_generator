@@ -47,7 +47,7 @@ def accept_tabledata
   #=> [[月1, 火1, 水1, ...], [月2, 火2, 水2, ...], ...]
 end
 
-filename = accept_filename
+filename = accept_filename(true) # ファイルの新規作成を許容．
 File.open(filename, 'w') do |f|
   f.puts(create_table.to_html)
 end

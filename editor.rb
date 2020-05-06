@@ -2,10 +2,13 @@ require './common'
 
 def edit_field(html)
   doc = Nokogiri::HTML.parse(html)
-  column_index, row_index = accept_field_designation
-  unless row_index && column_index
+  column_index = nil
+  row_index = nil
+  loop do
+    column_index, row_index = accept_field_designation
+    break if row_index && column_index
+
     puts '時間割の指定に誤りがあります．もう一度入力してください．'
-    return nil
   end
 
   child = Nokogiri::HTML::DocumentFragment.parse('')
@@ -40,8 +43,8 @@ def edit_table(filename)
   end
 
   loop do
-    table = edit_field(html)
-    return table if quit_confirmation
+    html = edit_field(html)
+    return html if quit_confirmation
   end
 end
 

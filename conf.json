@@ -1,1 +1,1 @@
-{"type":"normal","customed_field":{"0":{"name":"教員名","link":false},"1":{"name":"単位数","link":false},"2":{"name":"シラバス","link":true}}}
+{"type":"custom","customed_field":{"0":{"name":"名","link":false},"1":{"name":"単位数","link":false},"2":{"name":"シラバス","link":true}}}

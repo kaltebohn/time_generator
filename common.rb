@@ -13,16 +13,16 @@ end
 
 def fetch_table_type
   json = open('conf.json').read
-  type = JSON.parse(json, symbolize_names: true)[:type]
+  conf = JSON.parse(json, symbolize_names: true)
 
-  if type == 'zoom'
+  if conf[:type] == 'zoom'
     {
       url:  { name: 'ZoomURL', link: true },
       id:   { name: 'ZoomID', link: false },
       pass: { name: 'ZoomPass', link: false }
     }
-  elsif type == 'custom'
-    json[:customed_field]
+  elsif conf[:type] == 'custom'
+    conf[:customed_field]
   else
     {
       sylb: { name: 'シラバス', link: true },
@@ -54,11 +54,11 @@ def create_class_field(classdata)
   doc #=> <p>化学概論</p><br><a href='sample.com'>シラバス</a><br> ... </a>
 end
 
-def accept_filename
+def accept_filename(allow_create = false)
   loop do
     print '出力したいファイル名 >>'
     filename = gets.strip
-    return if File.exist?(filename)
+    return filename if File.exist?(filename) || allow_create
 
     puts 'ファイル名に誤りがあります．'
   end
