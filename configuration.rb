@@ -7,8 +7,8 @@ end
 opt = OptionParser.new
 opt_hash = JSON.parse(open('conf.json').read, symbolize_names: true)
 
-opt.on('-t', '--type TYPE', '時間割の種類(normal / zoom / four_links / custom)を指定．') do |param|
-  if %w[normal zoom four_links custom].include? param
+opt.on('-t', '--type TYPE', '時間割の種類(normal / zoom / custom)を指定．') do |param|
+  if %w[normal zoom custom].include? param
     opt_hash.merge!(type: param)
   else
     puts '-tオプションのパラメタが間違っています．'

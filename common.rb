@@ -21,13 +21,6 @@ def fetch_table_type
       id:   { name: 'ZoomID', link: false },
       pass: { name: 'ZoomPass', link: false }
     }
-  elsif type == 'four_links'
-    {
-      sylb: { name: 'シラバス', link: true },
-      wbcl: { name: 'WebClass', link: true },
-      glcl: { name: 'Googleクラス', link: true },
-      othe: { name: '授業関連ページ', link: true }
-    }
   elsif type == 'custom'
     json[:customed_field]
   else
