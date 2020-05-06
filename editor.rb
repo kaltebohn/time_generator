@@ -1,6 +1,6 @@
 require './common'
 
-def edit_table(html)
+def edit_field(html)
   doc = Nokogiri::HTML.parse(html)
   column_index, row_index = accept_field_designation
   unless row_index && column_index
@@ -33,7 +33,7 @@ def accept_field_designation
   [column_index, row_index]
 end
 
-def main(filename)
+def edit_table(filename)
   html = File.open(filename).read
   if html.empty?
     puts '空のファイルです．'
@@ -41,14 +41,15 @@ def main(filename)
   end
 
   loop do
-    table = edit_table(html)
+    table = edit_field(html)
     return table if quit_confirmation
   end
 end
 
-edited_table = main('test.html')
+filename = accept_filename
+edited_table = edit_table(filename)
 if edited_table
-  File.open('test.html', 'w') do |f|
+  File.open(filename, 'w') do |f|
     f.puts edited_table if edited_table
   end
 end

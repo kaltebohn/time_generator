@@ -47,6 +47,7 @@ def accept_tabledata
   #=> [[月1, 火1, 水1, ...], [月2, 火2, 水2, ...], ...]
 end
 
-File.open('test.html', 'w') do |f|
+filename = accept_filename
+File.open(filename, 'w') do |f|
   f.puts(create_table.to_html)
 end

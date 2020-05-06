@@ -1,5 +1,6 @@
 require 'json'
 require 'nokogiri'
+require 'optparse'
 require 'pry'
 
 def col_headers
@@ -58,6 +59,16 @@ def create_class_field(classdata)
     end
   end
   doc #=> <p>化学概論</p><br><a href='sample.com'>シラバス</a><br> ... </a>
+end
+
+def accept_filename
+  loop do
+    print '出力したいファイル名 >>'
+    filename = gets.strip
+    return if File.exist?(filename)
+
+    puts 'ファイル名に誤りがあります．'
+  end
 end
 
 def accept_classdata

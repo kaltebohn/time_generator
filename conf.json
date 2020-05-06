@@ -1,1 +1,1 @@
-{"type":"zoom","customed_field":{"0":{"name":"教員名","link":false}},"customed_field":{"0":{"name":"教員名","link":false},"1":{"name":"科目種別","link":false},"2":{"name":"シラバス","link":true}}}
+{"type":"normal","customed_field":{"0":{"name":"教員名","link":false},"1":{"name":"単位数","link":false},"2":{"name":"シラバス","link":true}}}

@@ -1,5 +1,3 @@
-require 'json'
-require 'optparse'
 require './common'
 
 def gets
@@ -7,10 +5,10 @@ def gets
 end
 
 opt = OptionParser.new
-opt_hash = JSON.parse(open('conf.json').read)
+opt_hash = JSON.parse(open('conf.json').read, symbolize_names: true)
 
 opt.on('-t', '--type TYPE', '時間割の種類(normal / zoom / four_links / custom)を指定．') do |param|
-  if %w[normal zoom four_links].include? param
+  if %w[normal zoom four_links custom].include? param
     opt_hash.merge!(type: param)
   else
     puts '-tオプションのパラメタが間違っています．'
@@ -37,7 +35,7 @@ opt.on('-c', '--custom', '時間割の種類を自分で作成．') do
     )
     break if quit_confirmation
   end
-  opt_hash.merge!(customed_field: customed_field)
+  opt_hash[:customed_field] = customed_field
 end
 
 opt.parse(ARGV)
