@@ -44,7 +44,7 @@ def edit_table(filename)
 
   loop do
     html = edit_field(html)
-    return html if quit_confirmation
+    return html if confirm_quit
   end
 end
 

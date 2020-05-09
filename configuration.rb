@@ -33,7 +33,7 @@ opt.on('-c', '--custom', '時間割の種類を自分で作成．') do
         link: link
       }
     )
-    break if quit_confirmation
+    break if confirm_quit
   end
   opt_hash[:customed_field] = customed_field
 end

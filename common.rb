@@ -11,7 +11,7 @@ def row_headers
   %w[1(9:00~10:30) 2(10:40~12:10) 3(13:00~14:30) 4(14:40~16:10) 5(16:15~17:45)]
 end
 
-def fetch_table_type
+def table_type_from_conf
   json = open('conf.json').read
   conf = JSON.parse(json, symbolize_names: true)
 
@@ -39,7 +39,7 @@ def create_class_field(classdata)
     td_node.p classdata[:name].empty? ? "\s" : classdata[:name]
     td_node.br
 
-    class_info = fetch_table_type
+    class_info = table_type_from_conf
     class_info.each do |key, value|
       if classdata[key].empty?
         td_node << "\s"
@@ -68,7 +68,7 @@ def accept_classdata
   print '授業名 >>'
   classdata = { name: gets.strip }
 
-  table_types = fetch_table_type
+  table_types = table_type_from_conf
   table_types.each do |key, value|
     print value[:name] + ' >>'
     classdata.merge!(key => gets.strip)
@@ -76,7 +76,7 @@ def accept_classdata
   classdata
 end
 
-def quit_confirmation
+def confirm_quit
   loop do
     print '操作を終えますか？(y / n) >>'
     command = gets.strip
